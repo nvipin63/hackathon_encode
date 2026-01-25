@@ -44,7 +44,7 @@ A small demo app showing a multi-agent workflow built with LangGraph and LLM age
 - Improve the router and add more conditional branches or parallel agent runs.
 
 ## Notes
-- This is a hackathon demo and contains simplified/mocked logic for illustration. The LLM responses are invoked directly and some return values are placeholders — plan for robust parsing and error handling before using in production.
+- This is a demo and contains simplified/mocked logic for illustration. The LLM responses are invoked directly and some return values are placeholders — plan for robust parsing and error handling before using in production.
 
 ## License
 - MIT
