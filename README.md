@@ -7,10 +7,11 @@ A working multi-agent workflow built with LangGraph and LLM agents to analyze us
 - **Trigger detective**: Analyzes journal entries for emotional/environmental triggers with structured output
 - **Nutritionist agent**: Recommends specific meals based on profile, health data, and triggers
 - **Logistics agent**: Generates grocery lists and scheduling plans automatically
+- **Safety Guardrails**: Protects against prompt injections and harmful nutritional advice
 
 ## Prerequisites
 - Python 3.10+
-- An OpenAI API key (get one at https://platform.openai.com/api-keys)
+- A Groq API key (or OpenAI API key if you switch providers)
 
 ## Installation
 
@@ -47,9 +48,35 @@ Create a `.env` file in the root directory:
 cp .env.example .env
 ```
 
-Then edit `.env` and add your OpenAI API key:
+Then edit `.env` and add your API key. By default, the app uses **Groq** via the `ChatGroq` class:
 ```
-OPENAI_API_KEY=your-actual-api-key-here
+GROQ_API_KEY=your-actual-api-key-here
+# OR if using OpenAI directly (requires code change, see below)
+# OPENAI_API_KEY=your-openai-api-key
+```
+
+## LLM Configuration
+
+Currently, the project uses **ChatGroq** with the `openai/gpt-oss-120b` model for fast and efficient inference.
+
+### Switching LLM Providers
+You can easily switch to OpenAI or other providers by modifying `main.py`:
+
+**To use OpenAI (GPT-4 / GPT-3.5):**
+1. Install the OpenAI package: `pip install langchain-openai`
+2. Update `main.py`:
+```python
+# Comment out ChatGroq import
+# from langchain_groq import ChatGroq
+
+# Uncomment ChatOpenAI import
+from langchain_openai import ChatOpenAI
+
+# Update initialization
+llm = ChatOpenAI(
+    model="gpt-4",
+    temperature=0
+)
 ```
 
 ## Usage
@@ -80,6 +107,7 @@ The script runs a scenario simulating a journal entry with stress and low energy
 ## What's New
 This version includes significant improvements over the original hackathon demo:
 
+✅ **Safety Guardrails** to prevent harmful output and prompt injections
 ✅ **Fixed critical syntax error** preventing the script from running
 ✅ **Structured JSON parsing** for all agent outputs
 ✅ **Proper error handling** with fallback mechanisms
@@ -100,13 +128,12 @@ This version includes significant improvements over the original hackathon demo:
 
 **ModuleNotFoundError**: Make sure you've installed dependencies with `pip install -r requirements.txt`
 
-**API Key Error**: Ensure your `.env` file exists and contains a valid `OPENAI_API_KEY`
+**API Key Error**: Ensure your `.env` file exists and contains a valid API key.
 
 **Python/Pip not found**: Ensure Python 3.10+ is installed and added to your system PATH
 
 ## License
-MIT
+Apache License 2.0
 
-## Contributing
-Open issues and PRs are welcome!
-
+## Disclaimer
+This application uses Artificial Intelligence to generate text and nutritional recommendations. The content produced by this app is for informational purposes only and should not be considered medical advice. AI models can hallucinate or produce inaccurate information. Always proceed with caution and consult with a qualified healthcare professional before making significant changes to your diet or health routine.
