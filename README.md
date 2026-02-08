@@ -1,53 +1,112 @@
 # Hackathon Encode — Multi-Agent Nutrition Assistant
 
-A small demo app showing a multi-agent workflow built with LangGraph and LLM agents to analyze user journal entries, detect eating triggers, and suggest healthy meals with logistics (scheduling/grocery). This repository contains a single runnable example in `main.py` that demonstrates preference learning, trigger detection, nutrition suggestion, and logistics agents wired together in a StateGraph.
+A working multi-agent workflow built with LangGraph and LLM agents to analyze user journal entries, detect eating triggers, and suggest healthy meals with logistics (scheduling/grocery). This application demonstrates preference learning, trigger detection, nutrition suggestion, and logistics agents wired together in a StateGraph.
 
 ## Features
-- Preference learning agent: extracts and updates user food preferences
-- Trigger detective: analyzes journal entries for emotional/environmental triggers
-- Nutritionist agent: recommends meals based on profile, health data, and triggers
-- Logistics agent: mocks scheduling and grocery list integration
+- **Preference learning agent**: Extracts and updates user food preferences using JSON parsing
+- **Trigger detective**: Analyzes journal entries for emotional/environmental triggers with structured output
+- **Nutritionist agent**: Recommends specific meals based on profile, health data, and triggers
+- **Logistics agent**: Generates grocery lists and scheduling plans automatically
 
 ## Prerequisites
 - Python 3.10+
-- An OpenAI-compatible LLM key set in the environment variable `OPENAI_API_KEY`
-- Optional: `python-dotenv` if you prefer loading env vars from a `.env` file
+- An OpenAI API key (get one at https://platform.openai.com/api-keys)
 
-## Install
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/nvipin63/hackathon_encode.git
-   cd hackathon_encode
-   ```
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate   # macOS / Linux
-   .venv\Scripts\activate    # Windows (PowerShell)
-   ```
-3. Install dependencies (example):
-   ```bash
-   pip install langchain-openai langchain-core langgraph python-dotenv
-   ```
+## Installation
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/nvipin63/hackathon_encode.git
+cd hackathon_encode
+```
+
+### 2. Create and activate a virtual environment (recommended)
+```bash
+# Windows
+python -m venv .venv
+.venv\Scripts\activate
+
+# macOS / Linux
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+If you encounter issues with pip, try:
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 4. Set up your environment variables
+Create a `.env` file in the root directory:
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` and add your OpenAI API key:
+```
+OPENAI_API_KEY=your-actual-api-key-here
+```
 
 ## Usage
-- Make sure `OPENAI_API_KEY` is exported in your environment.
-- Run the demo:
-  ```bash
-  python main.py
-  ```
-- The script runs a scenario that simulates a journal entry with stress and low energy and prints the workflow output.
 
-## Extending the demo
-- Replace placeholder parsing with structured function-calling or JSON parsing for robust state updates.
-- Add more agents, tools, or connectors (calendar, shopping APIs).
-- Improve the router and add more conditional branches or parallel agent runs.
+### Web Interface (Recommended)
+1. Start the Flask web server:
+```bash
+python app.py
+```
 
-## Notes
-- This is a demo and contains simplified/mocked logic for illustration. The LLM responses are invoked directly and some return values are placeholders — plan for robust parsing and error handling before using in production.
+2. Open your browser and navigate to:
+```
+http://localhost:5000
+```
+
+3. Enter your journal entry, select your preferences, and click "Analyze My Journal"
+
+4. Watch as the AI agents process your input and provide personalized recommendations!
+
+### Command Line Interface
+For the original CLI experience, run:
+```bash
+python main.py
+```
+
+The script runs a scenario simulating a journal entry with stress and low energy, demonstrating the complete workflow through all four agents.
+
+## What's New
+This version includes significant improvements over the original hackathon demo:
+
+✅ **Fixed critical syntax error** preventing the script from running
+✅ **Structured JSON parsing** for all agent outputs
+✅ **Proper error handling** with fallback mechanisms
+✅ **Working preference agent** that actually updates user profiles
+✅ **Enhanced trigger detection** with reliable structured output
+✅ **Detailed nutritionist recommendations** with specific meals and reasoning
+✅ **Intelligent logistics** that extracts ingredients and creates formatted plans
+✅ **Environment validation** to ensure API key is configured
+
+## Extending the Project
+- Add more trigger types or health metrics
+- Integrate real calendar/shopping APIs (Google Calendar, Instacart)
+- Add a web interface or chatbot frontend
+- Implement user authentication and persistent storage
+- Create more complex routing logic with parallel agent execution
+
+## Troubleshooting
+
+**ModuleNotFoundError**: Make sure you've installed dependencies with `pip install -r requirements.txt`
+
+**API Key Error**: Ensure your `.env` file exists and contains a valid `OPENAI_API_KEY`
+
+**Python/Pip not found**: Ensure Python 3.10+ is installed and added to your system PATH
 
 ## License
-- MIT
+MIT
 
 ## Contributing
-- Open issues and PRs are welcome.
+Open issues and PRs are welcome!
+

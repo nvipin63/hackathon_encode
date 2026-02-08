@@ -1,0 +1,10 @@
+langchain-openai>=0.1.0
+langchain-core>=0.2.0
+langchain-groq>=0.1.0
+langgraph>=0.1.0
+python-dotenv>=1.0.0
+openai>=1.0.0
+flask>=3.0.0
+flask-cors>=4.0.0
+
+
