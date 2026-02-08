@@ -132,6 +132,21 @@ This version includes significant improvements over the original hackathon demo:
 
 **Python/Pip not found**: Ensure Python 3.10+ is installed and added to your system PATH
 
+## Deployment
+
+### Vercel
+This project is configured for easy deployment on [Vercel](https://vercel.com).
+
+1. Install the Vercel CLI (optional) or connect your GitHub repository to Vercel.
+2. If using the CLI:
+   ```bash
+   vercel
+   ```
+3. Set your environment variables in the Vercel dashboard:
+   - `GROQ_API_KEY`: Your Groq API key
+
+The `vercel.json` and `api/index.py` files are already configured to serve the Flask application as a Serverless Function.
+
 ## License
 Apache License 2.0
 
