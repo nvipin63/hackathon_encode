@@ -107,6 +107,19 @@ def health_check():
         'service': 'Nutrition Assistant API'
     }), 200
 
+@flask_app.route('/api/debug', methods=['GET'])
+def debug_env():
+    """Debug endpoint to check environment (Be careful not to expose actual keys)"""
+    groq_key = os.getenv("GROQ_API_KEY")
+    openai_key = os.getenv("OPENAI_API_KEY")
+    
+    return jsonify({
+        'groq_key_present': bool(groq_key),
+        'openai_key_present': bool(openai_key),
+        'groq_key_length': len(groq_key) if groq_key else 0,
+        'env_vars': list(os.environ.keys())  # List available env vars keys only
+    }), 200
+
 if __name__ == '__main__':
     print("\n" + "="*60)
     print("🚀 Starting Nutrition Assistant Web Server")
