@@ -145,6 +145,12 @@ This project is configured for easy deployment on [Vercel](https://vercel.com).
 3. Set your environment variables in the Vercel dashboard:
    - `GROQ_API_KEY`: Your Groq API key
 
+### Troubleshooting Vercel 500 Errors
+If you see a "500: INTERNAL_SERVER_ERROR" or "FUNCTION_INVOCATION_FAILED":
+1. Check Vercel Logs: Go to the Vercel dashboard > Deployments > [Your Deployment] > Functions to see the error traceback.
+2. Verify API Keys: Ensure `GROQ_API_KEY` (or `OPENAI_API_KEY`) is set in Vercel Settings > Environment Variables.
+3. Check Dependencies: Ensure `requirements.txt` includes all necessary packages.
+
 The `vercel.json` and `api/index.py` files are already configured to serve the Flask application as a Serverless Function.
 
 ## License

@@ -11,8 +11,8 @@ from langchain_core.messages import HumanMessage
 load_dotenv()
 
 # Validate API key
-if not os.getenv("OPENAI_API_KEY"):
-    raise ValueError("OPENAI_API_KEY not found in environment variables. Please check your .env file.")
+if not os.getenv("OPENAI_API_KEY") and not os.getenv("GROQ_API_KEY"):
+    print("WARNING: API keys not found in environment variables. Set OPENAI_API_KEY or GROQ_API_KEY for functionality.")
 
 # Create Flask app
 flask_app = Flask(__name__, static_folder='static', static_url_path='')
